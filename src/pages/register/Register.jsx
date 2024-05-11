@@ -11,6 +11,10 @@ export default function Register() {
 
   const navigate = useNavigate();
 
+  const handleLoginRedirect = () => {
+    navigate("/login");
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -26,7 +30,7 @@ export default function Register() {
         };
         // registerAPIをたたく
         await axios.post("/auth/register", user);
-        navigate("/login")
+        navigate("/login");
       } catch (error) {
         console.log(error);
       }
@@ -76,7 +80,12 @@ export default function Register() {
             <button className="loginButton" type="submit">
               サインアップ
             </button>
-            <button className="loginRegisterButton">ログイン</button>
+            <button
+              className="loginRegisterButton"
+              onClick={handleLoginRedirect}
+            >
+              ログイン
+            </button>
           </form>
         </div>
       </div>
