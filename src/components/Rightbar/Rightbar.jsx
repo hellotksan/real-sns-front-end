@@ -44,7 +44,7 @@ export default function Rightbar({ user }) {
           alt=""
           className="rightbarPromotionImg"
         />
-        <p className="promotionName">高橋株式会社</p>
+        <p className="promotionName">ビジネス</p>
       </>
     );
   };
