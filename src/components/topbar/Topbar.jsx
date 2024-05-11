@@ -7,10 +7,11 @@ import { AuthContext } from "../../state/AuthContext";
 export default function Topbar() {
   const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
 
-  const { user, logout } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
 
   const handleLogout = () => {
-    logout(); // ログアウト処理を実行する
+    // ローカルストレージから"user"キーのデータを削除する
+    localStorage.removeItem("user");
   };
 
   return (
