@@ -36,7 +36,10 @@ export default function Share() {
     }
 
     try {
-      await axios.post("/posts", newPost);
+      await axios.post(
+        "https://real-sns-back-end.onrender.com/api/posts/",
+        newPost
+      );
       window.location.reload();
     } catch (error) {
       console.log(error);
