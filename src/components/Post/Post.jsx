@@ -27,7 +27,10 @@ export default function Post({ post }) {
   // いいねボタンの処理
   const handleLike = async () => {
     try {
-      await axios.put(`/posts/${post._id}/like`, { userId: currentUser._id });
+      await axios.put(
+        `https://real-sns-back-end.onrender.com/api/posts/${post._id}/like`,
+        { userId: currentUser._id }
+      );
     } catch (error) {
       console.log(error);
     }
