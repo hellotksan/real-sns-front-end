@@ -10,8 +10,12 @@ export default function Topbar() {
   const { user } = useContext(AuthContext);
 
   const handleLogout = () => {
-    // ローカルストレージから"user"キーのデータを削除する
-    localStorage.removeItem("user");
+    const confirmLogout = window.confirm("ログアウトしますか？");
+    if (confirmLogout) {
+      // ローカルストレージから"user"キーのデータを削除する
+      localStorage.removeItem("user");
+      window.location.reload();
+    }
   };
 
   return (
