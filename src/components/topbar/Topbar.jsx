@@ -8,6 +8,14 @@ export default function Topbar() {
   const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
 
   const { user } = useContext(AuthContext);
+
+  const handleLogout = () => {
+    // ローカルストレージから"user"キーのデータを削除する
+    localStorage.removeItem("user");
+    // ユーザー情報を削除する処理
+    setUser(null);
+  };
+
   return (
     <div className="topbarContainer">
       {/* 左側にはロゴを表示する ------------------------------------------------------------------------------------------------------------*/}
@@ -49,6 +57,9 @@ export default function Topbar() {
               className="topbarImg"
             />
           </Link>
+          <button className="topbarLogout" onClick={handleLogout}>
+            Logout
+          </button>
         </div>
       </div>
     </div>
