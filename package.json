@@ -44,5 +44,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://real-sns-back-end.onrender.com/api"
+  "proxy": "https://real-sns-front-end.vercel.app//api"
 }
