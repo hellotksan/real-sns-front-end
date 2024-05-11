@@ -2,11 +2,18 @@ import React, { useContext, useRef } from "react";
 import "./Login.css";
 import { loginCall } from "../../actionCalls";
 import { AuthContext } from "../../state/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
   const email = useRef();
   const password = useRef();
   const { user, isFetching, error, dispatch } = useContext(AuthContext);
+
+  const navigate = useNavigate();
+
+  const handleRegisterRedirect = () => {
+    navigate("/");
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -46,9 +53,14 @@ export default function Login() {
               minLength="6"
               ref={password}
             />
-            <button className="loginButton"> ログイン</button>
+            <button className="loginButton">ログイン</button>
             <span className="loginForgot">パスワードを忘れた方へ</span>
-            <button className="loginRegisterButton">アカウント作成</button>
+            <button
+              className="loginRegisterButton"
+              onClick={handleRegisterRedirect}
+            >
+              アカウント作成
+            </button>
           </form>
         </div>
       </div>
