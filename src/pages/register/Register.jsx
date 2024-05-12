@@ -35,7 +35,13 @@ export default function Register() {
         );
         navigate("/login");
       } catch (error) {
-        console.log(error);
+        if (error.response && error.response.status === 500) {
+          alert(
+            "このメールアドレスは既に登録されています。別のメールアドレスをお試しください。"
+          );
+        } else {
+          console.log(error);
+        }
       }
     }
   };
