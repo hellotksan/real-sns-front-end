@@ -58,33 +58,17 @@ export default function Rightbar({ user }) {
         <div className="rightbarInfo">
           <div className="rightbarInfoItem">
             <span className="rightbarInfoKey">出身:</span>
-            <span className="rightbarInfoKey">福岡</span>
+            <span className="rightbarInfoKey">未設定</span>
           </div>
           <h4 className="rightbarTitle">あなたの友達</h4>
           <div className="rightbarFollowings">
             <div className="rightbarFollowing">
               <img
-                src={PUBLIC_FOLDER + "/person/1.jpeg"}
+                src={PUBLIC_FOLDER + "/images/person/1.jpeg"}
                 alt=""
                 className="rightbarFollowingImg"
               />
               <span className="rightbarFollowingName">John Doe</span>
-            </div>
-            <div className="rightbarFollowing">
-              <img
-                src={PUBLIC_FOLDER + "/person/2.jpeg"}
-                alt=""
-                className="rightbarFollowingImg"
-              />
-              <span className="rightbarFollowingName">Jane Doe</span>
-            </div>
-            <div className="rightbarFollowing">
-              <img
-                src={PUBLIC_FOLDER + "/person/3.jpeg"}
-                alt=""
-                className="rightbarFollowingImg"
-              />
-              <span className="rightbarFollowingName">John Smith</span>
             </div>
           </div>
         </div>

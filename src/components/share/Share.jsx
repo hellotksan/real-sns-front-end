@@ -35,10 +35,7 @@ export default function Share() {
     }
 
     try {
-      await axios.post(
-        "https://real-sns-back-end.onrender.com/api/posts/",
-        newPost
-      );
+      await axios.post(PUBLIC_FOLDER + "/api/posts/", newPost);
       window.location.reload();
     } catch (error) {
       console.log(error);
@@ -53,7 +50,7 @@ export default function Share() {
             src={
               user.profilePicture
                 ? PUBLIC_FOLDER + user.profilePicture
-                : PUBLIC_FOLDER + "/person/noAvatar.png"
+                : PUBLIC_FOLDER + "/images/person/noAvatar.png"
             }
             alt=""
             className="shareProfileImg"

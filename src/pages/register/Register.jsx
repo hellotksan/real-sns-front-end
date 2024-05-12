@@ -4,6 +4,8 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 export default function Register() {
+  const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
+
   const username = useRef();
   const email = useRef();
   const password = useRef();
@@ -29,10 +31,7 @@ export default function Register() {
           password: password.current.value,
         };
         // registerAPIをたたく
-        await axios.post(
-          "https://real-sns-back-end.onrender.com/api/auth/register",
-          user
-        );
+        await axios.post(PUBLIC_FOLDER + "/api/auth/register", user);
         navigate("/login");
       } catch (error) {
         if (error.response && error.response.status === 500) {

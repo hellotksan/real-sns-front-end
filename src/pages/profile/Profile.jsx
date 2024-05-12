@@ -16,7 +16,7 @@ export default function Profile() {
   useEffect(() => {
     const fetchUser = async () => {
       const response = await axios.get(
-        `https://real-sns-back-end.onrender.com/api/users?username=${username}`
+        PUBLIC_FOLDER + `/api/users?username=${username}`
       );
       setUser(response.data);
     };
@@ -33,14 +33,17 @@ export default function Profile() {
           <div className="profileRightTop">
             <div className="profileCover">
               <img
-                src={user.coverPicture || PUBLIC_FOLDER + "/post/3.jpeg"}
+                src={
+                  PUBLIC_FOLDER + user.coverPicture ||
+                  PUBLIC_FOLDER + "/images/post/3.jpeg"
+                }
                 alt=""
                 className="profileCoverImg"
               />
               <img
                 src={
                   PUBLIC_FOLDER + user.profilePicture ||
-                  PUBLIC_FOLDER + "/person/noAvatar.png"
+                  PUBLIC_FOLDER + "/images/person/noAvatar.png"
                 }
                 alt=""
                 className="profileUserImg"

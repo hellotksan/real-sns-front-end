@@ -27,10 +27,9 @@ export default function Post({ post }) {
   // いいねボタンの処理
   const handleLike = async () => {
     try {
-      await axios.put(
-        `https://real-sns-back-end.onrender.com/api/posts/${post._id}/like`,
-        { userId: currentUser._id }
-      );
+      await axios.put(PUBLIC_FOLDER + `/api/posts/${post._id}/like`, {
+        userId: currentUser._id,
+      });
     } catch (error) {
       console.log(error);
     }
@@ -49,7 +48,7 @@ export default function Post({ post }) {
                 src={
                   user.profilePicture
                     ? PUBLIC_FOLDER + user.profilePicture
-                    : PUBLIC_FOLDER + "/person/noAvatar.png"
+                    : PUBLIC_FOLDER + "/images/person/noAvatar.png"
                 }
                 alt=""
                 className="postProfileImg"
@@ -74,7 +73,7 @@ export default function Post({ post }) {
           {/* いいね数の表示 */}
           <div className="postButtomLeft">
             <img
-              src={PUBLIC_FOLDER + "/heart.png"}
+              src={PUBLIC_FOLDER + "/images/heart.png"}
               alt=""
               className="likeIcon"
               onClick={() => {
@@ -87,7 +86,7 @@ export default function Post({ post }) {
           </div>
           {/* コメント数の表示 */}
           <div className="postButtomRight">
-            <span className="postCommentText">{post.comment}:コメント</span>
+            <span className="postCommentText">{post.comment}コメント</span>
           </div>
         </div>
       </div>
