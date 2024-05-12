@@ -10,7 +10,6 @@ export default function Share() {
   const desc = useRef();
 
   const [file, setFile] = useState(null);
-  console.log(file);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

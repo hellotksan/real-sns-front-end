@@ -15,7 +15,9 @@ export default function Profile() {
 
   useEffect(() => {
     const fetchUser = async () => {
-      const response = await axios.get(`/users?username=${username}`);
+      const response = await axios.get(
+        `https://real-sns-back-end.onrender.com/api/users?username=${username}`
+      );
       setUser(response.data);
     };
     fetchUser();
