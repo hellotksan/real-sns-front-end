@@ -15,15 +15,26 @@ export default function Login() {
     navigate("/");
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    loginCall(
-      {
-        email: email.current.value,
-        password: password.current.value,
-      },
-      dispatch
-    );
+    try {
+      const response = await loginCall(
+        {
+          email: email.current.value,
+          password: password.current.value,
+        },
+        dispatch
+      );
+      // ログイン成功の場合、リダイレクトや他の処理を行う
+      navigate("/");
+    } catch (error) {
+      if (error.response.status === 400) {
+        alert("パスワードが間違っています");
+      } else {
+        console.error("Login error:", error);
+        alert("ログインに失敗しました");
+      }
+    }
   };
 
   return (
