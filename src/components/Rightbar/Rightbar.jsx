@@ -6,6 +6,21 @@ import Online from "../online/Online";
 export default function Rightbar({ user }) {
   const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
 
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const response = await axios.get(`${PUBLIC_FOLDER}/api/users/all`);
+        setUsers(response.data);
+      } catch (error) {
+        console.error("Error fetching users:", error);
+      }
+    };
+
+    fetchUsers();
+  }, []);
+
   // ホームページ用の右サイドバー
   const HomeRightbar = () => {
     return (
@@ -18,13 +33,29 @@ export default function Rightbar({ user }) {
           </span>
         </div>
         {/* <img src="assets/event.jpeg" alt="" className="eventImg" /> */}
+
         {/* オンライン中のユーザの表示 */}
-        <h4 className="rightbarTitle">オンラインの友達</h4>
+        {/* <h4 className="rightbarTitle">オンラインの友達</h4> */}
         {/* <ul className="rightbarFriendList">
           {Users.map((user) => (
             <Online user={user} key={user.id} />
           ))}
         </ul> */}
+
+        <h4 className="rightbarTitle">全ユーザー</h4>
+        <div className="rightbarUserList">
+          {users.map((user) => (
+            <div className="rightbarUser" key={user._id}>
+              <img
+                src={PUBLIC_FOLDER + user.profilePicture}
+                alt=""
+                className="rightbarUserImg"
+              />
+              <span className="rightbarUserName">{user.username}</span>
+            </div>
+          ))}
+        </div>
+
         {/* プロモーション広告の表示 */}
         <p className="promotionTitle">プロモーション広告</p>
         {/* <img
@@ -32,19 +63,19 @@ export default function Rightbar({ user }) {
           alt=""
           className="rightbarPromotionImg"
         /> */}
-        <p className="promotionName">ショッピング</p>
+        {/* <p className="promotionName">ショッピング</p> */}
         {/* <img
           src="assets/promotion/promotion2.jpeg"
           alt=""
           className="rightbarPromotionImg"
         /> */}
-        <p className="promotionName">カーショッピング</p>
+        {/* <p className="promotionName">カーショッピング</p> */}
         {/* <img
           src="assets/promotion/promotion3.jpeg"
           alt=""
           className="rightbarPromotionImg"
         /> */}
-        <p className="promotionName">ビジネス</p>
+        {/* <p className="promotionName">ビジネス</p> */}
       </>
     );
   };
