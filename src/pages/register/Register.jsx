@@ -38,7 +38,8 @@ export default function Register() {
           alert(
             "このメールアドレスは既に登録されています。別のメールアドレスをお試しください。"
           );
-        } else {
+        }
+        else {
           console.log(error);
         }
       }

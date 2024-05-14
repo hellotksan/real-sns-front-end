@@ -48,7 +48,7 @@ export default function Post({ post }) {
                 src={
                   user.profilePicture
                     ? PUBLIC_FOLDER + user.profilePicture
-                    : PUBLIC_FOLDER + "/images/person/noAvatar.png"
+                    : PUBLIC_FOLDER + "/person/noAvatar.png"
                 }
                 alt=""
                 className="postProfileImg"
@@ -73,7 +73,7 @@ export default function Post({ post }) {
           {/* いいね数の表示 */}
           <div className="postButtomLeft">
             <img
-              src={PUBLIC_FOLDER + "/images/heart.png"}
+              src={PUBLIC_FOLDER + "/heart.png"}
               alt=""
               className="likeIcon"
               onClick={() => {

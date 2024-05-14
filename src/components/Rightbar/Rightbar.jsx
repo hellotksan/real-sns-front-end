@@ -12,38 +12,38 @@ export default function Rightbar({ user }) {
       <>
         {/* イベント情報に関するコンテナ */}
         <div className="eventContainer">
-          <img src="assets/star.png" alt="" className="starImg" />
+          {/* <img src="assets/star.png" alt="" className="starImg" /> */}
           <span className="eventText">
             <b> フォロワー限定</b>イベント開催中！
           </span>
         </div>
-        <img src="assets/event.jpeg" alt="" className="eventImg" />
+        {/* <img src="assets/event.jpeg" alt="" className="eventImg" /> */}
         {/* オンライン中のユーザの表示 */}
         <h4 className="rightbarTitle">オンラインの友達</h4>
-        <ul className="rightbarFriendList">
+        {/* <ul className="rightbarFriendList">
           {Users.map((user) => (
             <Online user={user} key={user.id} />
           ))}
-        </ul>
+        </ul> */}
         {/* プロモーション広告の表示 */}
         <p className="promotionTitle">プロモーション広告</p>
-        <img
+        {/* <img
           src="assets/promotion/promotion1.jpeg"
           alt=""
           className="rightbarPromotionImg"
-        />
+        /> */}
         <p className="promotionName">ショッピング</p>
-        <img
+        {/* <img
           src="assets/promotion/promotion2.jpeg"
           alt=""
           className="rightbarPromotionImg"
-        />
+        /> */}
         <p className="promotionName">カーショッピング</p>
-        <img
+        {/* <img
           src="assets/promotion/promotion3.jpeg"
           alt=""
           className="rightbarPromotionImg"
-        />
+        /> */}
         <p className="promotionName">ビジネス</p>
       </>
     );
@@ -63,11 +63,11 @@ export default function Rightbar({ user }) {
           <h4 className="rightbarTitle">あなたの友達</h4>
           <div className="rightbarFollowings">
             <div className="rightbarFollowing">
-              <img
+              {/* <img
                 src={PUBLIC_FOLDER + "/images/person/1.jpeg"}
                 alt=""
                 className="rightbarFollowingImg"
-              />
+              /> */}
               <span className="rightbarFollowingName">John Doe</span>
             </div>
           </div>
