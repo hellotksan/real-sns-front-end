@@ -1,26 +1,26 @@
 import React, { useEffect, useState } from "react";
 import "./Rightbar.css";
 import axios from "axios";
-import { Users } from "../../dummyData";
+import AllFriend from "../allFriend/AllFriend";
 import Online from "../online/Online";
 
 export default function Rightbar({ user }) {
   const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
 
-  const [users, setUsers] = useState([]);
+  // const [users, setUsers] = useState([]);
 
-  useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const response = await axios.get(`${PUBLIC_FOLDER}/api/users/all`);
-        setUsers(response.data);
-      } catch (error) {
-        console.error("Error fetching users:", error);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchUsers = async () => {
+  //     try {
+  //       const response = await axios.get(`${PUBLIC_FOLDER}/api/users/all`);
+  //       setUsers(response.data);
+  //     } catch (error) {
+  //       console.error("Error fetching users:", error);
+  //     }
+  //   };
 
-    fetchUsers();
-  }, []);
+  //   fetchUsers();
+  // }, []);
 
   // ホームページ用の右サイドバー
   const HomeRightbar = () => {
@@ -30,7 +30,7 @@ export default function Rightbar({ user }) {
         <div className="eventContainer">
           {/* <img src="assets/star.png" alt="" className="starImg" /> */}
           <span className="eventText">
-            <b> フォロワー限定</b>イベント開催中！
+            <b>フォロワー限定</b>イベント開催中！
           </span>
         </div>
         {/* <img src="assets/event.jpeg" alt="" className="eventImg" /> */}
@@ -43,10 +43,13 @@ export default function Rightbar({ user }) {
           ))}
         </ul> */}
 
-        <h4 className="rightbarTitle">全ユーザー</h4>
+        {/* 全ユーザの表示 */}
+        <AllFriend />
+
+        {/* <h4 className="rightbarTitle">全ユーザー</h4>
         <div className="rightbarUserList">
           {users.map((user) => (
-            <div className="rightbarUser" key={user._id}>
+            <div className="sidebarFriend" key={user._id}>
               <img
                 src={
                   user.profilePicture
@@ -56,10 +59,10 @@ export default function Rightbar({ user }) {
                 alt=""
                 className="rightbarUserImg"
               />
-              <span className="rightbarUserName">{user.username}</span>
+              <span className="sidebarFriendName">{user.username}</span>
             </div>
           ))}
-        </div>
+        </div> */}
 
         {/* プロモーション広告の表示 */}
         <p className="promotionTitle">プロモーション広告</p>
@@ -104,7 +107,7 @@ export default function Rightbar({ user }) {
                 alt=""
                 className="rightbarFollowingImg"
               /> */}
-              <span className="rightbarFollowingName">John Doe</span>
+              {/* <span className="rightbarFollowingName">John Doe</span> */}
             </div>
           </div>
         </div>

@@ -1,6 +1,6 @@
 import React from "react";
 
-// CloseFriendコンポーネントは、サイドバーに表示する友達の情報を表示します
+// サイドバーに友達の情報を表示
 export default function CloseFriend({ user }) {
   const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
   return (
