@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./Post.css";
 import { MoreVert } from "@mui/icons-material";
-// import { Users } from "../../dummyData";
 import axios from "axios";
 import { format } from "timeago.js";
 import { Link } from "react-router-dom";
@@ -18,8 +17,12 @@ export default function Post({ post }) {
 
   useEffect(() => {
     const fetchUser = async () => {
-      const response = await axios.get(`/users?userId=${post.userId}`);
-      setUser(response.data);
+      try {
+        const response = await axios.get(`/users?userId=${post.userId}`);
+        setUser(response.data);
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
     };
     fetchUser();
   }, [post.userId]);
