@@ -50,7 +50,7 @@ export default function Share() {
             src={
               user.profilePicture
                 ? PUBLIC_FOLDER + user.profilePicture
-                : PUBLIC_FOLDER + "/person/noAvatar.png"
+                : PUBLIC_FOLDER + "/images/person/noAvatar.png"
             }
             alt=""
             className="shareProfileImg"
