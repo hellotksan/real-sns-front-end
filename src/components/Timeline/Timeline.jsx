@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from "react";
 import "./Timeline.css";
 import Share from "../share/Share";
 import Post from "../Post/Post";
-// import { Posts } from "../../dummyData";
 import axios from "axios";
 import { AuthContext } from "../../state/AuthContext";
 
