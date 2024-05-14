@@ -26,7 +26,7 @@ export default function Login() {
         dispatch
       );
       // ログイン成功の場合、リダイレクトや他の処理を行う
-      navigate("/");
+      // navigate("/");
     } catch (error) {
       if (error.response.status === 400) {
         alert("パスワードが間違っています");
