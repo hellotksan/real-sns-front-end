@@ -18,7 +18,9 @@ export default function Post({ post }) {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await axios.get(`/users?userId=${post.userId}`);
+        const response = await axios.get(
+          PUBLIC_FOLDER + `/api/users?userId=${post.userId}`
+        );
         setUser(response.data);
       } catch (error) {
         console.error("Error fetching user data:", error);
