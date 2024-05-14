@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Rightbar.css";
 import { Users } from "../../dummyData";
 import Online from "../online/Online";
@@ -47,7 +47,11 @@ export default function Rightbar({ user }) {
           {users.map((user) => (
             <div className="rightbarUser" key={user._id}>
               <img
-                src={PUBLIC_FOLDER + user.profilePicture}
+                src={
+                  user.profilePicture
+                    ? PUBLIC_FOLDER + user.profilePicture
+                    : PUBLIC_FOLDER + "/images/person/noAvatar.png"
+                }
                 alt=""
                 className="rightbarUserImg"
               />
