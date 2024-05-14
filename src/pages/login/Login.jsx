@@ -28,12 +28,7 @@ export default function Login() {
       // ログイン成功の場合、リダイレクトや他の処理を行う
       // navigate("/");
     } catch (error) {
-      if (error.response.status === 400) {
-        alert("パスワードが間違っています");
-      } else {
-        console.error("Login error:", error);
-        alert("ログインに失敗しました");
-      }
+      console.log(error);
     }
   };
 
