@@ -1,27 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "./Rightbar.css";
-import axios from "axios";
 import AllFriend from "../allFriend/AllFriend";
 import Online from "../online/Online";
 
 export default function Rightbar({ user }) {
-  const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
-
-  // const [users, setUsers] = useState([]);
-
-  // useEffect(() => {
-  //   const fetchUsers = async () => {
-  //     try {
-  //       const response = await axios.get(`${PUBLIC_FOLDER}/api/users/all`);
-  //       setUsers(response.data);
-  //     } catch (error) {
-  //       console.error("Error fetching users:", error);
-  //     }
-  //   };
-
-  //   fetchUsers();
-  // }, []);
-
   // ホームページ用の右サイドバー
   const HomeRightbar = () => {
     return (
@@ -35,34 +17,8 @@ export default function Rightbar({ user }) {
         </div>
         {/* <img src="assets/event.jpeg" alt="" className="eventImg" /> */}
 
-        {/* オンライン中のユーザの表示 */}
-        {/* <h4 className="rightbarTitle">オンラインの友達</h4> */}
-        {/* <ul className="rightbarFriendList">
-          {Users.map((user) => (
-            <Online user={user} key={user.id} />
-          ))}
-        </ul> */}
-
         {/* 全ユーザの表示 */}
         <AllFriend />
-
-        {/* <h4 className="rightbarTitle">全ユーザー</h4>
-        <div className="rightbarUserList">
-          {users.map((user) => (
-            <div className="sidebarFriend" key={user._id}>
-              <img
-                src={
-                  user.profilePicture
-                    ? PUBLIC_FOLDER + user.profilePicture
-                    : PUBLIC_FOLDER + "/images/person/noAvatar.png"
-                }
-                alt=""
-                className="rightbarUserImg"
-              />
-              <span className="sidebarFriendName">{user.username}</span>
-            </div>
-          ))}
-        </div> */}
 
         {/* プロモーション広告の表示 */}
         <p className="promotionTitle">プロモーション広告</p>
