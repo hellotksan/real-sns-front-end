@@ -31,7 +31,7 @@ export default function Setting() {
         <div className="profileRight">
           {/* ユーザのプロフィール -----------------------------------------------------------------------------------------------------------*/}
           <div className="profileRightTop">
-            <div className="profileInfo">
+            <div>
               <h4>{user.username}</h4>
               <span>{user.desc}</span>
               <button>編集</button>

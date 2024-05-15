@@ -8,12 +8,32 @@ import {
   Settings,
 } from "@mui/icons-material";
 import "./Sidebar.css";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Users } from "../../dummyData";
 import CloseFriend from "../closeFriend/CloseFriend";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import axios from "axios";
 
 export default function Sidebar() {
+  const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
+
+  const [user, setUser] = useState({});
+  const { username } = useParams();
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const response = await axios.get(
+          PUBLIC_FOLDER + `/api/users?username=${username}`
+        );
+        setUser(response.data);
+      } catch (error) {
+        console.error("Error fetching user:", error);
+      }
+    };
+    fetchUser();
+  }, [username]);
+
   return (
     <div className="sidebar">
       <div className="sidebarWrapper">
@@ -43,7 +63,7 @@ export default function Sidebar() {
           <li className="sidebarListItem">
             <Person className="sidebarIcon" />
             <Link
-              to="/profile/shincode"
+              to={`/profile/${user.username}`}
               style={{ textDecoration: "none", color: "black" }}
             >
               <span className="sidebarListItemText">プロフィール</span>
@@ -51,6 +71,10 @@ export default function Sidebar() {
           </li>
           <li className="sidebarListItem">
             <Settings className="sidebarIcon" />
+            <Link
+              to={`/settings/${user.username}`}
+              style={{ textDecoration: "none", color: "black" }}
+            />
             <span className="sidebarListItemText">設定</span>
           </li>
         </ul>
