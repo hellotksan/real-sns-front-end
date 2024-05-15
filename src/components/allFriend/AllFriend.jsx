@@ -22,9 +22,9 @@ const AllFriend = () => {
   return (
     <div>
       <h4 className="rightbarTitle">全ユーザー</h4>
-      <div className="rightbarUserList">
+      <div className="rightbarFriendList">
         {users.map((user) => (
-          <div className="sidebarFriend" key={user._id}>
+          <div className="rightbarFriend" key={user._id}>
             <img
               src={
                 user.profilePicture
@@ -32,9 +32,9 @@ const AllFriend = () => {
                   : PUBLIC_FOLDER + "/images/person/noAvatar.png"
               }
               alt=""
-              className="rightbarUserImg"
+              className="rightbarProfileImg"
             />
-            <span className="sidebarFriendName">{user.username}</span>
+            <span className="rightbarUsername">{user.username}</span>
           </div>
         ))}
       </div>
