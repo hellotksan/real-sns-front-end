@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Topbar from "../../components/topbar/Topbar";
 import Sidebar from "../../components/Sidebar/Sidebar";
-// import Timeline from "../../components/Timeline/Timeline";
-import Rightbar from "../../components/Rightbar/Rightbar";
+import EditProfile from "../../components/Setting/Setting";
 import "./Settings.css";
 import axios from "axios";
 import { useParams } from "react-router-dom";
@@ -29,20 +28,8 @@ export default function Setting() {
       <div className="profile">
         <Sidebar />
         <div className="profileRight">
-          {/* ユーザのプロフィール -----------------------------------------------------------------------------------------------------------*/}
-          <div className="profileRightTop">
-            <div>
-              <h4>{user.username}</h4>
-              <span>{user.desc}</span>
-              <button>編集</button>
-              <button>ユーザの削除</button>
-            </div>
-          </div>
-          {/* その他プロフィール ------------------------------------------------------------------------------------------------*/}
-          <div className="profileRightBottom">
-            {/* <Timeline username={username} /> */}
-            <Rightbar user={user} />
-          </div>
+          {/* ユーザのプロフィール */}
+          <EditProfile username={user.username} desc={user.desc} />
         </div>
       </div>
     </>
