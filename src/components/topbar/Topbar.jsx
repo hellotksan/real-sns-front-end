@@ -1,20 +1,32 @@
 import { Chat, Notifications, Search } from "@mui/icons-material";
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./Topbar.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../state/AuthContext";
 
 export default function Topbar() {
   const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
 
   const { user } = useContext(AuthContext);
+  const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (user !== undefined) {
+      setLoading(false);
+    }
+  }, [user]);
 
   const handleLogout = () => {
     const confirmLogout = window.confirm("ログアウトしますか？");
     if (confirmLogout) {
-      // ローカルストレージから"user"キーのデータを削除する
-      localStorage.removeItem("user");
-      window.location.reload();
+      try {
+        // ローカルストレージから"user"キーのデータを削除する
+        localStorage.removeItem("user");
+        navigate("/login");
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 

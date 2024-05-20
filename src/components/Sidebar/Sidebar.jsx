@@ -9,7 +9,6 @@ import {
 } from "@mui/icons-material";
 import "./Sidebar.css";
 import React, { useEffect, useState } from "react";
-import CloseFriend from "../closeFriend/CloseFriend";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
@@ -18,17 +17,17 @@ export default function Sidebar() {
 
   // ローカルで保存されたデータからusernameを取得
   const savedUser = localStorage.getItem("user");
-  const parsedUser = JSON.parse(savedUser); // JSON文字列をJavaScriptオブジェクトに変換
-  // usernameを取得する
-  const savedUsername = parsedUser.username;
+  // JSON文字列をJavaScriptオブジェクトに変換
+  const parsedUser = JSON.parse(savedUser);
+  const savedUsername = parsedUser && parsedUser.username;
 
   const [user, setUser] = useState({});
-  const [isLoading, setIsLoading] = useState(true);
+  // const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchUser = async () => {
       if (!savedUsername) {
-        setIsLoading(false); // ユーザー名がない場合はローディングを終了
+        // setIsLoading(false); // ユーザー名がない場合はローディングを終了
         return;
       }
 
@@ -37,10 +36,10 @@ export default function Sidebar() {
           PUBLIC_FOLDER + `/api/users?username=${savedUsername}`
         );
         setUser(response.data);
-        setIsLoading(false); // データ取得後にローディングを終了
+        // setIsLoading(false); // データ取得後にローディングを終了
       } catch (error) {
         console.error("Error fetching user:", error);
-        setIsLoading(false); // エラー時もローディングを終了
+        // setIsLoading(false); // エラー時もローディングを終了
       }
     };
     fetchUser();
