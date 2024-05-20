@@ -49,7 +49,7 @@ export default function Share() {
           <img
             src={
               user.profilePicture
-                ? PUBLIC_FOLDER + user.profilePicture
+                ? PUBLIC_FOLDER + "/images" + user.profilePicture
                 : PUBLIC_FOLDER + "/images/person/noAvatar.png"
             }
             alt=""
