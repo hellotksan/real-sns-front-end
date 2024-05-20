@@ -1,10 +1,15 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-const EditProfile = ({ username, desc }) => {
+const EditProfile = ({ username }) => {
   const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
 
+  const navigate = useNavigate();
+
   const [user, setUser] = useState({});
+  const [desc, setDesc] = useState("");
+  const [isConfirmOpen, setIsConfirmOpen] = useState(false);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -13,52 +18,82 @@ const EditProfile = ({ username, desc }) => {
           `${PUBLIC_FOLDER}/api/users?username=${username}`
         );
         setUser(response.data);
+        setDesc(response.data.desc);
+        console.log(user);
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
     };
     fetchUser();
-  }, [username]);
+  }, []);
 
   const handleEdit = async () => {
     try {
       const response = await axios.put(
-        `${PUBLIC_FOLDER}/api/users/${user.id}`,
+        `${PUBLIC_FOLDER}/api/users/${user._id}`,
         {
-          /* 編集するユーザーのデータ */
+          userId: user._id,
+          desc: desc,
         }
       );
-      console.log(response.data); // 成功時のメッセージなどをログに出力
+      console.log(response.data);
     } catch (error) {
       console.error("Error editing user:", error);
     }
   };
 
   const handleDelete = async () => {
+    setIsConfirmOpen(true);
+  };
+
+  const confirmDelete = async () => {
     try {
       const response = await axios.delete(
-        `${PUBLIC_FOLDER}/api/users/${user.id}`,
+        `${PUBLIC_FOLDER}/api/users/${user._id}`,
         {
           data: {
-            userId: user.id, // ユーザーIDをリクエストボディに含める
-            isAdmin: true, // 管理者権限を持っている場合はtrueにする（必要に応じて）
+            userId: user._id,
           },
         }
       );
-      console.log(response.data); // 成功時のメッセージなどをログに出力
+      console.log(response.data);
+      alert("ユーザが削除されました。");
+      localStorage.clear();
+      navigate("/login");
     } catch (error) {
       console.error("Error deleting user:", error);
     }
+  };
+
+  const cancelDelete = () => {
+    setIsConfirmOpen(false);
+    alert("ユーザ削除がキャンセルされました。");
   };
 
   return (
     <div className="profileRightTop">
       <h2>ユーザ設定</h2>
       <div>
-        <h4>{username}</h4>
-        <span>{desc}</span>
-        <button onClick={handleEdit}>編集</button>
-        <button onClick={handleDelete}>ユーザの削除</button>
+        <h4>ユーザ名：{user.username}</h4>
+        <span>ユーザ情報：</span>
+        <input
+          type="text"
+          value={desc}
+          onChange={(e) => setDesc(e.target.value)}
+        />
+        <div>
+          <button onClick={handleEdit}>編集</button>
+        </div>
+        <div>
+          <button onClick={handleDelete}>ユーザ削除</button>
+        </div>
+        {isConfirmOpen && (
+          <div>
+            <p>ユーザを削除してもよろしいですか？</p>
+            <button onClick={confirmDelete}>削除</button>
+            <button onClick={cancelDelete}>キャンセル</button>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -10,17 +10,22 @@ export default function Setting() {
   const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
 
   const [user, setUser] = useState({});
-  const username = useParams().username;
+  const { username } = useParams();
 
   useEffect(() => {
     const fetchUser = async () => {
-      const response = await axios.get(
-        PUBLIC_FOLDER + `/api/users?username=${username}`
-      );
-      setUser(response.data);
+      try {
+        const response = await axios.get(
+          PUBLIC_FOLDER + `/api/users?username=${username}`
+        );
+        setUser(response.data);
+        console.log("Success fetching user data!", user);
+      } catch (error) {
+        console.log("Error fetching user data.", error);
+      }
     };
     fetchUser();
-  }, []);
+  }, [username, PUBLIC_FOLDER]);
 
   return (
     <>
@@ -29,7 +34,7 @@ export default function Setting() {
         <Sidebar />
         <div className="profileRight">
           {/* ユーザのプロフィール */}
-          <EditProfile username={user.username} desc={user.desc} />
+          <EditProfile username={username} />
         </div>
       </div>
     </>
