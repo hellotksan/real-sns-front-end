@@ -24,6 +24,7 @@ export default function Topbar() {
         // ローカルストレージから"user"キーのデータを削除する
         localStorage.removeItem("user");
         navigate("/login");
+        window.location.reload();
       } catch (error) {
         console.log(error);
       }

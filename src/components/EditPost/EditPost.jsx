@@ -5,28 +5,12 @@ import { AuthContext } from "../../state/AuthContext";
 
 const EditPost = ({}) => {
   const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
-  const { user, isFetching, error } = useContext(AuthContext);
 
+  const { user, isFetching, error } = useContext(AuthContext);
   const navigate = useNavigate();
   const { username, postId } = useParams();
-
-  const [isConfirmOpen, setIsConfirmOpen] = useState(false);
-
   const [post, setPost] = useState({});
   const [postDesc, setPostDesc] = useState("");
-
-  useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        const response = await axios.get(
-          `${PUBLIC_FOLDER}/api/users?username=${username}`
-        );
-      } catch (error) {
-        console.error("Error fetching user data:", error);
-      }
-    };
-    fetchUser();
-  }, []);
 
   useEffect(() => {
     const fetchPost = async () => {
@@ -46,15 +30,20 @@ const EditPost = ({}) => {
   const handleEdit = async () => {
     try {
       if (user.username == username) {
-        const response = await axios.put(
-          `${PUBLIC_FOLDER}/api/posts/${post._id}`,
-          {
-            userId: user._id,
-            desc: postDesc,
-          }
-        );
+        if (window.confirm("本当に更新してもよろしいですか？")) {
+          const response = await axios.put(
+            `${PUBLIC_FOLDER}/api/posts/${post._id}`,
+            {
+              userId: user._id,
+              desc: postDesc,
+            }
+          );
+          alert("更新しました。");
+        } else {
+          alert("更新をキャンセルしました。");
+        }
       } else {
-        alert("編集権限がありません。");
+        alert("更新権限がありません。");
       }
     } catch (error) {
       console.error("Error editing user:", error);
@@ -62,34 +51,29 @@ const EditPost = ({}) => {
   };
 
   const handleDelete = async () => {
-    setIsConfirmOpen(true);
-  };
-
-  const confirmDelete = async () => {
     try {
       if (user.username == username) {
-        const response = await axios.delete(
-          `${PUBLIC_FOLDER}/api/posts/${post._id}`,
-          {
-            data: {
-              userId: user._id,
-            },
-          }
-        );
-        alert("投稿が削除されました。");
-        localStorage.clear();
-        navigate("/");
+        if (window.confirm("本当に削除してもよろしいですか？")) {
+          const response = await axios.delete(
+            `${PUBLIC_FOLDER}/api/posts/${post._id}`,
+            {
+              data: {
+                userId: user._id,
+              },
+            }
+          );
+          alert("投稿が削除されました。");
+          navigate("/");
+          window.location.reload();
+        } else {
+          alert("削除をキャンセルしました。");
+        }
       } else {
         alert("削除権限がありません。");
       }
     } catch (error) {
       console.error("Error deleting post:", error);
     }
-  };
-
-  const cancelDelete = () => {
-    setIsConfirmOpen(false);
-    alert("投稿削除がキャンセルされました。");
   };
 
   if (isFetching) {
@@ -120,13 +104,6 @@ const EditPost = ({}) => {
         <div>
           <button onClick={handleDelete}>投稿削除</button>
         </div>
-        {isConfirmOpen && (
-          <div>
-            <p>投稿を削除してもよろしいですか？</p>
-            <button onClick={confirmDelete}>削除</button>
-            <button onClick={cancelDelete}>キャンセル</button>
-          </div>
-        )}
       </div>
     </div>
   );
