@@ -63,7 +63,12 @@ export default function Post({ post }) {
             <span className="postDate">{format(post.createdAt)}</span>
           </div>
           <div className="postTopRight">
-            <MoreVert />
+            <Link
+              to={`/postedit/${post._id}`}
+              style={{ textDecoration: "none", color: "black" }}
+            >
+              <MoreVert />
+            </Link>
           </div>
         </div>
 

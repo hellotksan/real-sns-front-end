@@ -6,7 +6,7 @@ import "./Settings.css";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 
-export default function Setting() {
+function Setting() {
   const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
 
   const [user, setUser] = useState({});
@@ -40,3 +40,5 @@ export default function Setting() {
     </>
   );
 }
+
+export default Setting;

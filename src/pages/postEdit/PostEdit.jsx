@@ -33,7 +33,7 @@ function PostEdit() {
       <div className="profile">
         <Sidebar />
         <div className="profileRight">
-          <EditPost />
+          <EditPost username={username} />
         </div>
       </div>
     </>
