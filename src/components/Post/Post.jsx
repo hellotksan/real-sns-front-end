@@ -64,7 +64,7 @@ export default function Post({ post }) {
           </div>
           <div className="postTopRight">
             <Link
-              to={`/postedit/${post._id}`}
+              to={`/postedit/${user.username}/${post._id}`}
               style={{ textDecoration: "none", color: "black" }}
             >
               <MoreVert />
@@ -75,7 +75,11 @@ export default function Post({ post }) {
         {/* 投稿した内容を表示する */}
         <div className="postCenter">
           <span className="postText">{post.desc}</span>
-          <img src={PUBLIC_FOLDER + post.img} alt="" className="postImg" />
+          <img
+            src={PUBLIC_FOLDER + "/images/" + post.img}
+            alt=""
+            className="postImg"
+          />
         </div>
 
         {/* 投稿記事のいいね数とコメント数を表示する */}

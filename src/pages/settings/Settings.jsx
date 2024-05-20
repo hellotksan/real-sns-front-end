@@ -19,7 +19,6 @@ function Setting() {
           PUBLIC_FOLDER + `/api/users?username=${username}`
         );
         setUser(response.data);
-        console.log("Success fetching user data!", user);
       } catch (error) {
         console.log("Error fetching user data.", error);
       }

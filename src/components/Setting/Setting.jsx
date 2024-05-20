@@ -1,13 +1,14 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../state/AuthContext";
 
 const EditProfile = ({ username }) => {
   const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
+  const { user, isFetching, error } = useContext(AuthContext);
 
   const navigate = useNavigate();
 
-  const [user, setUser] = useState({});
   const [desc, setDesc] = useState("");
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
 
@@ -17,9 +18,7 @@ const EditProfile = ({ username }) => {
         const response = await axios.get(
           `${PUBLIC_FOLDER}/api/users?username=${username}`
         );
-        setUser(response.data);
         setDesc(response.data.desc);
-        console.log(user);
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
@@ -29,14 +28,18 @@ const EditProfile = ({ username }) => {
 
   const handleEdit = async () => {
     try {
-      const response = await axios.put(
-        `${PUBLIC_FOLDER}/api/users/${user._id}`,
-        {
-          userId: user._id,
-          desc: desc,
-        }
-      );
-      console.log(response.data);
+      if (user.username == username) {
+        const response = await axios.put(
+          `${PUBLIC_FOLDER}/api/users/${user._id}`,
+          {
+            userId: user._id,
+            desc: desc,
+          }
+        );
+        alert("ユーザ情報を更新しました");
+      } else {
+        alert("編集権限がありません");
+      }
     } catch (error) {
       console.error("Error editing user:", error);
     }
@@ -48,18 +51,21 @@ const EditProfile = ({ username }) => {
 
   const confirmDelete = async () => {
     try {
-      const response = await axios.delete(
-        `${PUBLIC_FOLDER}/api/users/${user._id}`,
-        {
-          data: {
-            userId: user._id,
-          },
-        }
-      );
-      console.log(response.data);
-      alert("ユーザが削除されました。");
-      localStorage.clear();
-      navigate("/login");
+      if (user.username == username) {
+        const response = await axios.delete(
+          `${PUBLIC_FOLDER}/api/users/${user._id}`,
+          {
+            data: {
+              userId: user._id,
+            },
+          }
+        );
+        alert("ユーザを削除しました。");
+        localStorage.clear();
+        navigate("/login");
+      } else {
+        alert("削除権限がありません。");
+      }
     } catch (error) {
       console.error("Error deleting user:", error);
     }
@@ -69,6 +75,14 @@ const EditProfile = ({ username }) => {
     setIsConfirmOpen(false);
     alert("ユーザ削除がキャンセルされました。");
   };
+
+  if (isFetching) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error occurred</div>;
+  }
 
   return (
     <div className="profileRightTop">

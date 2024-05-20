@@ -27,7 +27,7 @@ function App() {
         />
         <Route path="/profile/:username" element={<Profile />} />
         <Route path="/settings/:username" element={<Setting />} />
-        <Route path="/postedit/:postId" element={<PostEdit />} />
+        <Route path="/postedit/:username/:postId" element={<PostEdit />} />
       </Routes>
     </Router>
   );

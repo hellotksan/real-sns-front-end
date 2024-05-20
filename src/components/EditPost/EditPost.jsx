@@ -1,15 +1,15 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { AuthContext } from "../../state/AuthContext";
 
-const EditPost = ({ username }) => {
+const EditPost = ({}) => {
   const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
+  const { user, isFetching, error } = useContext(AuthContext);
 
   const navigate = useNavigate();
-  const { postId } = useParams();
+  const { username, postId } = useParams();
 
-  const [user, setUser] = useState({});
-  const [desc, setDesc] = useState("");
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
 
   const [post, setPost] = useState({});
@@ -21,9 +21,6 @@ const EditPost = ({ username }) => {
         const response = await axios.get(
           `${PUBLIC_FOLDER}/api/users?username=${username}`
         );
-        setUser(response.data);
-        setDesc(response.data.desc);
-        console.log(user);
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
@@ -39,7 +36,6 @@ const EditPost = ({ username }) => {
         );
         setPost(response.data);
         setPostDesc(response.data.desc);
-        console.log(post);
       } catch (error) {
         console.error("Error fetching post data:", error);
       }
@@ -49,14 +45,17 @@ const EditPost = ({ username }) => {
 
   const handleEdit = async () => {
     try {
-      const response = await axios.put(
-        `${PUBLIC_FOLDER}/api/users/${user._id}`,
-        {
-          userId: user._id,
-          desc: desc,
-        }
-      );
-      console.log(response.data);
+      if (user.username == username) {
+        const response = await axios.put(
+          `${PUBLIC_FOLDER}/api/posts/${post._id}`,
+          {
+            userId: user._id,
+            desc: postDesc,
+          }
+        );
+      } else {
+        alert("編集権限がありません。");
+      }
     } catch (error) {
       console.error("Error editing user:", error);
     }
@@ -68,36 +67,47 @@ const EditPost = ({ username }) => {
 
   const confirmDelete = async () => {
     try {
-      const response = await axios.delete(
-        `${PUBLIC_FOLDER}/api/users/${user._id}`,
-        {
-          data: {
-            userId: user._id,
-          },
-        }
-      );
-      console.log(response.data);
-      alert("ユーザが削除されました。");
-      localStorage.clear();
-      navigate("/login");
+      if (user.username == username) {
+        const response = await axios.delete(
+          `${PUBLIC_FOLDER}/api/posts/${post._id}`,
+          {
+            data: {
+              userId: user._id,
+            },
+          }
+        );
+        alert("投稿が削除されました。");
+        localStorage.clear();
+        navigate("/");
+      } else {
+        alert("削除権限がありません。");
+      }
     } catch (error) {
-      console.error("Error deleting user:", error);
+      console.error("Error deleting post:", error);
     }
   };
 
   const cancelDelete = () => {
     setIsConfirmOpen(false);
-    alert("ユーザ削除がキャンセルされました。");
+    alert("投稿削除がキャンセルされました。");
   };
+
+  if (isFetching) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error occurred</div>;
+  }
 
   return (
     <div className="profileRightTop">
       <h2>投稿設定</h2>
       <div>
-        <div>ユーザ名：{user.username}</div>
+        <div>投稿者名：{user.username}</div>
         <div>投稿番号：{post._id}</div>
         <div>投稿時間：{post.updatedAt}</div>
-        <div>いいね数：{post.likes.length}</div>
+        <div>いいね数：{post.likes ? post.likes.length : "N/A"}</div>
         <span>内容：</span>
         <input
           type="text"
@@ -112,7 +122,7 @@ const EditPost = ({ username }) => {
         </div>
         {isConfirmOpen && (
           <div>
-            <p>ユーザを削除してもよろしいですか？</p>
+            <p>投稿を削除してもよろしいですか？</p>
             <button onClick={confirmDelete}>削除</button>
             <button onClick={cancelDelete}>キャンセル</button>
           </div>
