@@ -52,15 +52,25 @@ function ShowProfile() {
   }, [user, username]);
 
   const handleFollow = async () => {
-    // フォロー処理をここに記述
-    // 例: API呼び出しを行い、フォロー状態を更新する
+    try {
+      await axios.put(PUBLIC_FOLDER + `/api/users/${showingUser._id}/follow`, {
+        userId: user._id,
+      });
+    } catch (error) {
+      console.log(error);
+    }
     console.log("Follow button clicked");
     setIsFollowing(true);
   };
 
   const handleUnfollow = async () => {
-    // アンフォロー処理をここに記述
-    // 例: API呼び出しを行い、フォロー状態を更新する
+    try {
+      await axios.put(PUBLIC_FOLDER + `/api/users/${showingUser._id}/unfollow`, {
+        userId: user._id,
+      });
+    } catch (error) {
+      console.log(error);
+    }
     console.log("Unfollow button clicked");
     setIsFollowing(false);
   };
