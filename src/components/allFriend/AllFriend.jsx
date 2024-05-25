@@ -32,18 +32,15 @@ const AllFriend = () => {
             style={{ textDecoration: "none", color: "black" }}
           >
             <div className="rightbarFriend" key={user._id}>
-              <img
-                src={
-                  user.profilePicture ? (
-                    PUBLIC_FOLDER + "/images" + user.profilePicture
-                  ) : (
-                    // : PUBLIC_FOLDER + "/images/person/noAvatar.png"
-                    <PersonIcon />
-                  )
-                }
-                alt=""
-                className="rightbarProfileImg"
-              />
+              {user.profilePicture ? (
+                <img
+                  src={`${PUBLIC_FOLDER}/images/${user.profilePicture}`}
+                  alt=""
+                  className="rightbarProfileImg"
+                />
+              ) : (
+                <PersonIcon className="rightbarProfileImg" />
+              )}
               <span className="rightbarUsername">{user.username}</span>
             </div>
           </Link>

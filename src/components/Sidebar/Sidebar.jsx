@@ -17,32 +17,24 @@ import { AuthContext } from "../../state/AuthContext";
 export default function Sidebar() {
   const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
 
-  // ローカルで保存されたデータからusernameを取得
-  const savedUser = localStorage.getItem("user");
-  // JSON文字列をJavaScriptオブジェクトに変換
-  const parsedUser = JSON.parse(savedUser);
-  const savedUsername = parsedUser && parsedUser.username;
-
   const { user } = useContext(AuthContext);
 
   useEffect(() => {
     const fetchUser = async () => {
-      if (!savedUsername) {
+      if (!user) {
         return;
       }
 
       try {
         const response = await axios.get(
-          PUBLIC_FOLDER + `/api/users?username=${savedUsername}`
+          `${PUBLIC_FOLDER}/api/users?username=${user.username}`
         );
       } catch (error) {
-        console.error("Error fetching user:", error);
+        console.error(error);
       }
     };
     fetchUser();
-  }, [savedUsername]);
-
-  console.log(user);
+  }, []);
 
   return (
     <div className="sidebar">

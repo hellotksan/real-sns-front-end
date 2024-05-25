@@ -52,18 +52,15 @@ function CloseFriend() {
             style={{ textDecoration: "none", color: "black" }}
           >
             <div className="rightbarFriend" key={friend._id}>
-              <img
-                src={
-                  friend.profilePicture ? (
-                    PUBLIC_FOLDER + "/images" + friend.profilePicture
-                  ) : (
-                    // : PUBLIC_FOLDER + "/images/person/noAvatar.png"
-                    <PersonIcon />
-                  )
-                }
-                alt=""
-                className="rightbarProfileImg"
-              />
+              {friend.profilePicture ? (
+                <img
+                  src={`${PUBLIC_FOLDER}/images/${friend.profilePicture}`}
+                  alt=""
+                  className="rightbarProfileImg"
+                />
+              ) : (
+                <PersonIcon className="rightProfileImg" />
+              )}
               <span className="rightbarUsername">{friend.username}</span>
             </div>
           </Link>

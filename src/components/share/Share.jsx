@@ -47,18 +47,15 @@ export default function Share() {
     <div className="share">
       <div className="shareWrapper">
         <div className="shareTop">
-          <img
-            src={
-              user.profilePicture ? (
-                PUBLIC_FOLDER + "/images" + user.profilePicture
-              ) : (
-                // : PUBLIC_FOLDER + "/images/person/noAvatar.png"
-                <PersonIcon />
-              )
-            }
-            alt=""
-            className="shareProfileImg"
-          />
+          {user.profilePicture ? (
+            <img
+              src={`${PUBLIC_FOLDER}/images/${user.profilePicture}`}
+              alt=""
+              className="shareProfileImg"
+            />
+          ) : (
+            <PersonIcon className="shareProfileImg" />
+          )}
           <input
             type="text"
             className="shareInput"
@@ -81,7 +78,7 @@ export default function Share() {
                 onChange={(e) => setFile(e.target.files[0])}
               />
             </label>
-            <div className="shareOption">
+            {/* <div className="shareOption">
               <Gif className="shareIcon" htmlColor="hotpink" />
               <span className="shareOptionText">GIF</span>
             </div>
@@ -92,7 +89,7 @@ export default function Share() {
             <div className="shareOption">
               <Analytics className="shareIcon" htmlColor="red" />
               <span className="shareOptionText">投票</span>
-            </div>
+            </div> */}
           </div>
           <button className="shareButton" type="submit">
             投稿

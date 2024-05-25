@@ -20,7 +20,6 @@ function ShowProfile() {
           `${PUBLIC_FOLDER}/api/users?username=${username}`
         );
         setShowingUser(response.data);
-        console.log(showingUser);
       } catch (error) {
         console.error("Error fetching user data:", error);
       }
@@ -43,9 +42,8 @@ function ShowProfile() {
               break;
             }
           }
-          console.log(isFollowing);
-        } catch (err) {
-          console.error("Error fetching following status:", err);
+        } catch (error) {
+          console.error(error);
         }
       }
     };
@@ -103,18 +101,15 @@ function ShowProfile() {
           alt=""
           className="profileCoverImg"
         />
-        <img
-          src={
-            user.profilePicture ? (
-              PUBLIC_FOLDER + "/images" + user.profilePicture
-            ) : (
-              // : PUBLIC_FOLDER + "/images/person/noAvatar.png"
-              <PersonIcon />
-            )
-          }
-          alt=""
-          className="profileUserImg"
-        />
+        {showingUser.profilePicture ? (
+          <img
+            src={`${PUBLIC_FOLDER}/images/${showingUser.profilePicture}`}
+            alt=""
+            className="profileUserImg"
+          />
+        ) : (
+          <PersonIcon className="profileUserImg" />
+        )}
       </div>
       <div className="profileInfo">
         <h4 className="profileInfoName">{showingUser.username}</h4>

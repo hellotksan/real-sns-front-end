@@ -63,18 +63,15 @@ export default function Topbar() {
             <span className="topbarIconBadge">2</span>
           </div>
           <Link to={`/profile/${user.username}`}>
-            <img
-              src={
-                user.profilePicture ? (
-                  PUBLIC_FOLDER + "/images" + user.profilePicture
-                ) : (
-                  // : PUBLIC_FOLDER + "/images/person/noAvatar.png"
-                  <PersonIcon />
-                )
-              }
-              alt=""
-              className="topbarImg"
-            />
+            {user.profilePicture ? (
+              <img
+                src={`${PUBLIC_FOLDER}/images/${user.profilePicture}`}
+                alt=""
+                className="topbarImg"
+              />
+            ) : (
+              <PersonIcon className="topbarImg" />
+            )}
           </Link>
           <button className="topbarLogout" onClick={handleLogout}>
             Logout
