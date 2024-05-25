@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { AuthContext } from "../../state/AuthContext";
 
-const EditPost = ({}) => {
+const EditPost = () => {
   const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
 
   const { user, isFetching, error } = useContext(AuthContext);
@@ -21,23 +21,20 @@ const EditPost = ({}) => {
         setPost(response.data);
         setPostDesc(response.data.desc);
       } catch (error) {
-        console.error("Error fetching post data:", error);
+        console.error(error);
       }
     };
     fetchPost();
-  }, []);
+  }, [postId, PUBLIC_FOLDER]);
 
   const handleEdit = async () => {
     try {
-      if (user.username == username) {
+      if (user.username === username) {
         if (window.confirm("本当に更新してもよろしいですか？")) {
-          const response = await axios.put(
-            `${PUBLIC_FOLDER}/api/posts/${post._id}`,
-            {
-              userId: user._id,
-              desc: postDesc,
-            }
-          );
+          await axios.put(`${PUBLIC_FOLDER}/api/posts/${post._id}`, {
+            userId: user._id,
+            desc: postDesc,
+          });
           alert("更新しました。");
         } else {
           alert("更新をキャンセルしました。");
@@ -52,16 +49,13 @@ const EditPost = ({}) => {
 
   const handleDelete = async () => {
     try {
-      if (user.username == username) {
+      if (user.username === username) {
         if (window.confirm("本当に削除してもよろしいですか？")) {
-          const response = await axios.delete(
-            `${PUBLIC_FOLDER}/api/posts/${post._id}`,
-            {
-              data: {
-                userId: user._id,
-              },
-            }
-          );
+          await axios.delete(`${PUBLIC_FOLDER}/api/posts/${post._id}`, {
+            data: {
+              userId: user._id,
+            },
+          });
           alert("投稿が削除されました。");
           navigate("/");
           window.location.reload();
@@ -72,7 +66,7 @@ const EditPost = ({}) => {
         alert("削除権限がありません。");
       }
     } catch (error) {
-      console.error("Error deleting post:", error);
+      console.error(error);
     }
   };
 

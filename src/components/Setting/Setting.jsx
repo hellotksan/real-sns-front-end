@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../state/AuthContext";
-import "./Setting.css"
+import "./Setting.css";
 
 const EditProfile = ({ username }) => {
   const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
@@ -23,19 +23,16 @@ const EditProfile = ({ username }) => {
       }
     };
     fetchUser();
-  }, []);
+  }, [username, PUBLIC_FOLDER]);
 
   const handleEdit = async () => {
     try {
-      if (user.username == username) {
+      if (user.username === username) {
         if (window.confirm("本当に変更してもよろしいですか？")) {
-          const response = await axios.put(
-            `${PUBLIC_FOLDER}/api/users/${user._id}`,
-            {
-              userId: user._id,
-              desc: desc,
-            }
-          );
+          await axios.put(`${PUBLIC_FOLDER}/api/users/${user._id}`, {
+            userId: user._id,
+            desc: desc,
+          });
           alert("ユーザ情報を更新しました");
         } else {
           alert("変更をキャンセルしました。");
@@ -50,16 +47,13 @@ const EditProfile = ({ username }) => {
 
   const handleDelete = async () => {
     try {
-      if (user.username == username) {
+      if (user.username === username) {
         if (window.confirm("本当に削除してもよろしいですか？")) {
-          const response = await axios.delete(
-            `${PUBLIC_FOLDER}/api/users/${user._id}`,
-            {
-              data: {
-                userId: user._id,
-              },
-            }
-          );
+          await axios.delete(`${PUBLIC_FOLDER}/api/users/${user._id}`, {
+            data: {
+              userId: user._id,
+            },
+          });
           alert("ユーザを削除しました。");
           localStorage.clear();
           navigate("/login");

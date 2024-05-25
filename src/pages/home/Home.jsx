@@ -5,7 +5,7 @@ import Sidebar from "../../components/Sidebar/Sidebar";
 import Timeline from "../../components/Timeline/Timeline";
 import Rightbar from "../../components/Rightbar/Rightbar";
 
-export default function Home() {
+function Home() {
   return (
     <>
       <Topbar />
@@ -17,3 +17,5 @@ export default function Home() {
     </>
   );
 }
+
+export default Home;

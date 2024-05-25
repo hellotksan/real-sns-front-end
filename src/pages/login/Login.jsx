@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 export default function Login() {
   const email = useRef();
   const password = useRef();
-  const { user, isFetching, error, dispatch } = useContext(AuthContext);
+  const { isFetching, error, dispatch } = useContext(AuthContext);
 
   const navigate = useNavigate();
 
@@ -18,19 +18,26 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await loginCall(
+      await loginCall(
         {
           email: email.current.value,
           password: password.current.value,
         },
         dispatch
       );
-      // ログイン成功の場合、リダイレクトや他の処理を行う
-      // navigate("/");
+      navigate("/");
     } catch (error) {
       console.log(error);
     }
   };
+
+  if (isFetching) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error occurred</div>;
+  }
 
   return (
     <div className="login">

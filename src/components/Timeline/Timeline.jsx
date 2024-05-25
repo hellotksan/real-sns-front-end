@@ -24,7 +24,7 @@ export default function Timeline({ username }) {
       );
     };
     fetchPosts();
-  }, [username, user._id]);
+  }, [username, user._id, PUBLIC_FOLDER]);
 
   return (
     <div className="timeline">

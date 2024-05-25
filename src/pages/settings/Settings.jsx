@@ -1,30 +1,34 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import Topbar from "../../components/topbar/Topbar";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import EditProfile from "../../components/Setting/Setting";
 import "./Settings.css";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { AuthContext } from "../../state/AuthContext";
 
 function Setting() {
   const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
 
-  const [user, setUser] = useState({});
-  const { username } = useParams();
+  const { user, isFetching, error } = useContext(AuthContext);
 
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await axios.get(
-          PUBLIC_FOLDER + `/api/users?username=${username}`
-        );
-        setUser(response.data);
+        await axios.get(PUBLIC_FOLDER + `/api/users?username=${user.username}`);
       } catch (error) {
-        console.log("Error fetching user data.", error);
+        console.log(error);
       }
     };
     fetchUser();
-  }, [username, PUBLIC_FOLDER]);
+  }, [user.username, PUBLIC_FOLDER]);
+
+  if (isFetching) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error occurred</div>;
+  }
 
   return (
     <>
@@ -33,7 +37,7 @@ function Setting() {
         <Sidebar />
         <div className="profileRight">
           {/* ユーザのプロフィール */}
-          <EditProfile username={username} />
+          <EditProfile username={user.username} />
         </div>
       </div>
     </>

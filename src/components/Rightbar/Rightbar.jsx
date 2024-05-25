@@ -1,7 +1,6 @@
 import React from "react";
 import "./Rightbar.css";
 import AllFriend from "../allFriend/AllFriend";
-import Online from "../online/Online";
 import CloseFriend from "../closeFriend/CloseFriend";
 
 export default function Rightbar({ user }) {

@@ -8,7 +8,7 @@ import {
   Settings,
 } from "@mui/icons-material";
 import "./Sidebar.css";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import CloseFriend from "../closeFriend/CloseFriend";
 import { Link } from "react-router-dom";
 import axios from "axios";
@@ -26,15 +26,13 @@ export default function Sidebar() {
       }
 
       try {
-        const response = await axios.get(
-          `${PUBLIC_FOLDER}/api/users?username=${user.username}`
-        );
+        await axios.get(`${PUBLIC_FOLDER}/api/users?username=${user.username}`);
       } catch (error) {
         console.error(error);
       }
     };
     fetchUser();
-  }, []);
+  }, [user, PUBLIC_FOLDER]);
 
   return (
     <div className="sidebar">

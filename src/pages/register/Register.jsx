@@ -21,7 +21,7 @@ export default function Register() {
     e.preventDefault();
 
     // パスワードと確認用の確認用のパスワードがあっているかどうか確認
-    if (password.current.value != passwordConfirmation.current.value) {
+    if (password.current.value !== passwordConfirmation.current.value) {
       passwordConfirmation.current.setCustomValidity("パスワードが違います");
     } else {
       try {
@@ -38,8 +38,7 @@ export default function Register() {
           alert(
             "このメールアドレスは既に登録されています。別のメールアドレスをお試しください。"
           );
-        }
-        else {
+        } else {
           console.log(error);
         }
       }

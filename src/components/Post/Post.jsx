@@ -28,7 +28,7 @@ export default function Post({ post }) {
       }
     };
     fetchUser();
-  }, [post.userId]);
+  }, [post.userId, PUBLIC_FOLDER]);
 
   // いいねボタンの処理
   const handleLike = async () => {

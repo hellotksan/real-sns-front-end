@@ -1,6 +1,6 @@
 import { Chat, Notifications, Search } from "@mui/icons-material";
 import PersonIcon from "@mui/icons-material/Person";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import "./Topbar.css";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../state/AuthContext";
@@ -9,14 +9,7 @@ export default function Topbar() {
   const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
 
   const { user } = useContext(AuthContext);
-  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (user !== undefined) {
-      setLoading(false);
-    }
-  }, [user]);
 
   const handleLogout = () => {
     const confirmLogout = window.confirm("ログアウトしますか？");

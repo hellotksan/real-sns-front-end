@@ -25,7 +25,7 @@ function ShowProfile() {
       }
     };
     fetchShowingUser();
-  }, []);
+  }, [username, PUBLIC_FOLDER]);
 
   useEffect(() => {
     const checkFollowingStatus = async () => {
@@ -48,7 +48,7 @@ function ShowProfile() {
       }
     };
     checkFollowingStatus();
-  }, [user, username]);
+  }, [user, username, PUBLIC_FOLDER]);
 
   const handleFollow = async () => {
     try {
