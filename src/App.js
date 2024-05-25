@@ -1,3 +1,4 @@
+import React from "react";
 import { useContext } from "react";
 import Home from "./pages/home/Home";
 import Login from "./pages/login/Login";

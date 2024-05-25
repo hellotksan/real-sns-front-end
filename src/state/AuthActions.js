@@ -1,5 +1,5 @@
 // ユーザ入力に応じたアクションの設定
-export const LoginStart = (user) => ({
+export const LoginStart = () => ({
   type: "LOGIN_START",
 });
 

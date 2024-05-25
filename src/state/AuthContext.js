@@ -1,5 +1,6 @@
-import { createContext, useEffect, useReducer } from "react";
+import React, { createContext, useEffect, useReducer } from "react";
 import AuthReducer from "./AuthReducer";
+import PropTypes from "prop-types";
 
 // 最初のユーザ情報を定義
 const savedUserString = localStorage.getItem("user");
@@ -34,4 +35,8 @@ export const AuthContextProvider = ({ children }) => {
       {children}
     </AuthContext.Provider>
   );
+};
+
+AuthContextProvider.propTypes = {
+  children: PropTypes.node.isRequired,
 };
