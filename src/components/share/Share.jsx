@@ -3,6 +3,7 @@ import "./Share.css";
 import { Analytics, Face, Gif, Image, NoEncryption } from "@mui/icons-material";
 import { AuthContext } from "../../state/AuthContext";
 import axios from "axios";
+import PersonIcon from "@mui/icons-material/Person";
 
 export default function Share() {
   const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
@@ -48,9 +49,12 @@ export default function Share() {
         <div className="shareTop">
           <img
             src={
-              user.profilePicture
-                ? PUBLIC_FOLDER + "/images" + user.profilePicture
-                : PUBLIC_FOLDER + "/images/person/noAvatar.png"
+              user.profilePicture ? (
+                PUBLIC_FOLDER + "/images" + user.profilePicture
+              ) : (
+                // : PUBLIC_FOLDER + "/images/person/noAvatar.png"
+                <PersonIcon />
+              )
             }
             alt=""
             className="shareProfileImg"

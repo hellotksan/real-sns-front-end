@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../state/AuthContext";
+import PersonIcon from "@mui/icons-material/Person";
 
 // サイドバーに友達の情報を表示
 function CloseFriend() {
@@ -53,9 +54,12 @@ function CloseFriend() {
             <div className="rightbarFriend" key={friend._id}>
               <img
                 src={
-                  friend.profilePicture
-                    ? PUBLIC_FOLDER + "/images" + friend.profilePicture
-                    : PUBLIC_FOLDER + "/images/person/noAvatar.png"
+                  friend.profilePicture ? (
+                    PUBLIC_FOLDER + "/images" + friend.profilePicture
+                  ) : (
+                    // : PUBLIC_FOLDER + "/images/person/noAvatar.png"
+                    <PersonIcon />
+                  )
                 }
                 alt=""
                 className="rightbarProfileImg"

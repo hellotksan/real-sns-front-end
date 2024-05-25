@@ -3,6 +3,7 @@ import "./Profile.css";
 import { AuthContext } from "../../state/AuthContext";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import PersonIcon from "@mui/icons-material/Person";
 
 function ShowProfile() {
   const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
@@ -65,9 +66,12 @@ function ShowProfile() {
 
   const handleUnfollow = async () => {
     try {
-      await axios.put(PUBLIC_FOLDER + `/api/users/${showingUser._id}/unfollow`, {
-        userId: user._id,
-      });
+      await axios.put(
+        PUBLIC_FOLDER + `/api/users/${showingUser._id}/unfollow`,
+        {
+          userId: user._id,
+        }
+      );
     } catch (error) {
       console.log(error);
     }
@@ -101,9 +105,12 @@ function ShowProfile() {
         />
         <img
           src={
-            user.profilePicture
-              ? PUBLIC_FOLDER + "/images" + user.profilePicture
-              : PUBLIC_FOLDER + "/images/person/noAvatar.png"
+            user.profilePicture ? (
+              PUBLIC_FOLDER + "/images" + user.profilePicture
+            ) : (
+              // : PUBLIC_FOLDER + "/images/person/noAvatar.png"
+              <PersonIcon />
+            )
           }
           alt=""
           className="profileUserImg"

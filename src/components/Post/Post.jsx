@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./Post.css";
 import { MoreVert } from "@mui/icons-material";
+import PersonIcon from "@mui/icons-material/Person";
 import axios from "axios";
 import { format } from "timeago.js";
 import { Link } from "react-router-dom";
@@ -51,9 +52,12 @@ export default function Post({ post }) {
             <Link to={`/profile/${user.username}`}>
               <img
                 src={
-                  user.profilePicture
-                    ? PUBLIC_FOLDER + "/images" + user.profilePicture
-                    : PUBLIC_FOLDER + "/images/person/noAvatar.png"
+                  user.profilePicture ? (
+                    PUBLIC_FOLDER + "/images" + user.profilePicture
+                  ) : (
+                    // : PUBLIC_FOLDER + "/images/person/noAvatar.png"
+                    <PersonIcon />
+                  )
                 }
                 alt=""
                 className="postProfileImg"

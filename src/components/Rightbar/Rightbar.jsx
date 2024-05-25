@@ -2,6 +2,7 @@ import React from "react";
 import "./Rightbar.css";
 import AllFriend from "../allFriend/AllFriend";
 import Online from "../online/Online";
+import CloseFriend from "../closeFriend/CloseFriend";
 
 export default function Rightbar({ user }) {
   // ホームページ用の右サイドバー
@@ -10,36 +11,13 @@ export default function Rightbar({ user }) {
       <>
         {/* イベント情報に関するコンテナ */}
         <div className="eventContainer">
-          {/* <img src="assets/star.png" alt="" className="starImg" /> */}
           <span className="eventText">
             <b>フォロワー限定</b>イベント開催中！
           </span>
         </div>
-        {/* <img src="assets/event.jpeg" alt="" className="eventImg" /> */}
 
         {/* 全ユーザの表示 */}
         <AllFriend />
-
-        {/* プロモーション広告の表示 */}
-        <p className="promotionTitle">プロモーション広告</p>
-        {/* <img
-          src="assets/promotion/promotion1.jpeg"
-          alt=""
-          className="rightbarPromotionImg"
-        /> */}
-        {/* <p className="promotionName">ショッピング</p> */}
-        {/* <img
-          src="assets/promotion/promotion2.jpeg"
-          alt=""
-          className="rightbarPromotionImg"
-        /> */}
-        {/* <p className="promotionName">カーショッピング</p> */}
-        {/* <img
-          src="assets/promotion/promotion3.jpeg"
-          alt=""
-          className="rightbarPromotionImg"
-        /> */}
-        {/* <p className="promotionName">ビジネス</p> */}
       </>
     );
   };
@@ -58,12 +36,7 @@ export default function Rightbar({ user }) {
           <h4 className="rightbarTitle">あなたの友達</h4>
           <div className="rightbarFollowings">
             <div className="rightbarFollowing">
-              {/* <img
-                src={PUBLIC_FOLDER + "/images/person/1.jpeg"}
-                alt=""
-                className="rightbarFollowingImg"
-              /> */}
-              {/* <span className="rightbarFollowingName">John Doe</span> */}
+              <CloseFriend />
             </div>
           </div>
         </div>

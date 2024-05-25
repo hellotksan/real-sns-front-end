@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import PersonIcon from "@mui/icons-material/Person";
 import axios from "axios";
 import "./AllFriends.css";
 import { Link } from "react-router-dom";
@@ -33,9 +34,12 @@ const AllFriend = () => {
             <div className="rightbarFriend" key={user._id}>
               <img
                 src={
-                  user.profilePicture
-                    ? PUBLIC_FOLDER + "/images" + user.profilePicture
-                    : PUBLIC_FOLDER + "/images/person/noAvatar.png"
+                  user.profilePicture ? (
+                    PUBLIC_FOLDER + "/images" + user.profilePicture
+                  ) : (
+                    // : PUBLIC_FOLDER + "/images/person/noAvatar.png"
+                    <PersonIcon />
+                  )
                 }
                 alt=""
                 className="rightbarProfileImg"

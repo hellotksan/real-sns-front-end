@@ -1,4 +1,5 @@
 import { Chat, Notifications, Search } from "@mui/icons-material";
+import PersonIcon from "@mui/icons-material/Person";
 import React, { useContext, useEffect, useState } from "react";
 import "./Topbar.css";
 import { Link, useNavigate } from "react-router-dom";
@@ -33,13 +34,13 @@ export default function Topbar() {
 
   return (
     <div className="topbarContainer">
-      {/* 左側にはロゴを表示する ------------------------------------------------------------------------------------------------------------*/}
+      {/* 左側にはロゴを表示する */}
       <div className="topbarLeft">
         <Link to="/" style={{ textDecoration: "none" }}>
           <span className="logo">Real SNS</span>
         </Link>
       </div>
-      {/* 真ん中には検索バーを表示する -------------------------------------------------------------------------------------------------------*/}
+      {/* 真ん中には検索バーを表示する */}
       <div className="topbarCenter">
         <div className="searchbar">
           <Search className="searchbar" />
@@ -50,7 +51,7 @@ export default function Topbar() {
           />
         </div>
       </div>
-      {/* 右側にはチャット、通知のアイコンと、プロフィール画像を表示する ------------------------------------------------------------------------*/}
+      {/* 右側にはチャット、通知のアイコンと、プロフィール画像を表示する */}
       <div className="topbarRight">
         <div className="topbarIconItems">
           <div className="topbarIconItem">
@@ -64,9 +65,12 @@ export default function Topbar() {
           <Link to={`/profile/${user.username}`}>
             <img
               src={
-                user.profilePicture
-                  ? PUBLIC_FOLDER + "/images" + user.profilePicture
-                  : PUBLIC_FOLDER + "/images/person/noAvatar.png"
+                user.profilePicture ? (
+                  PUBLIC_FOLDER + "/images" + user.profilePicture
+                ) : (
+                  // : PUBLIC_FOLDER + "/images/person/noAvatar.png"
+                  <PersonIcon />
+                )
               }
               alt=""
               className="topbarImg"
