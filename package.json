@@ -55,7 +55,6 @@
     "@types/node": "^20.12.12",
     "@types/react": "^18.3.3",
     "autoprefixer": "^10.4.19",
-    "eslint": "^9.3.0",
     "eslint-config-react-app": "^7.0.1",
     "eslint-plugin-react": "^7.34.1",
     "globals": "^15.3.0",
