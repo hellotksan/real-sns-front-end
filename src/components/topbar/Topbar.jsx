@@ -8,14 +8,13 @@ import { AuthContext } from "../../state/AuthContext";
 export default function Topbar() {
   const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
 
-  const { user } = useContext(AuthContext);
+  const { user, isFetching, error } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleLogout = () => {
     const confirmLogout = window.confirm("ログアウトしますか？");
     if (confirmLogout) {
       try {
-        // ローカルストレージから"user"キーのデータを削除する
         localStorage.removeItem("user");
         navigate("/login");
         window.location.reload();
@@ -24,6 +23,18 @@ export default function Topbar() {
       }
     }
   };
+
+  if (isFetching) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
+
+  if (!user) {
+    return <div>User not found</div>;
+  }
 
   return (
     <div className="topbarContainer">
@@ -34,7 +45,7 @@ export default function Topbar() {
         </Link>
       </div>
       {/* 真ん中には検索バーを表示する */}
-      <div className="topbarCenter">
+      {/* <div className="topbarCenter">
         <div className="searchbar">
           <Search className="searchbar" />
           <input
@@ -43,19 +54,22 @@ export default function Topbar() {
             placeholder="探し物は何ですか？"
           />
         </div>
-      </div>
+      </div> */}
       {/* 右側にはチャット、通知のアイコンと、プロフィール画像を表示する */}
       <div className="topbarRight">
         <div className="topbarIconItems">
-          <div className="topbarIconItem">
+          {/* <div className="topbarIconItem">
             <Chat />
             <span className="topbarIconBadge">1</span>
-          </div>
-          <div className="topbarIconItem">
+          </div> */}
+          {/* <div className="topbarIconItem">
             <Notifications />
             <span className="topbarIconBadge">2</span>
-          </div>
-          <Link to={`/profile/${user.username}`}>
+          </div> */}
+          <Link
+            to={`/profile/${user.username}`}
+            style={{ textDecoration: "none", color: "black" }}
+          >
             {user.profilePicture ? (
               <img
                 src={`${PUBLIC_FOLDER}/images/${user.profilePicture}`}
@@ -63,8 +77,12 @@ export default function Topbar() {
                 className="topbarImg"
               />
             ) : (
-              <PersonIcon className="topbarImg" />
+              <PersonIcon
+                className="topbarImg"
+                style={{ textDecoration: "none", color: "white" }}
+              />
             )}
+            <span className="topbarLogout">{user.username}</span>
           </Link>
           <button className="topbarLogout" onClick={handleLogout}>
             Logout

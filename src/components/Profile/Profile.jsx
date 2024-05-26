@@ -21,7 +21,7 @@ function ShowProfile() {
         );
         setShowingUser(response.data);
       } catch (error) {
-        console.error("Error fetching user data:", error);
+        console.error(error);
       }
     };
     fetchShowingUser();
@@ -58,7 +58,6 @@ function ShowProfile() {
     } catch (error) {
       console.log(error);
     }
-    console.log("Follow button clicked");
     setIsFollowing(true);
   };
 
@@ -73,7 +72,6 @@ function ShowProfile() {
     } catch (error) {
       console.log(error);
     }
-    console.log("Unfollow button clicked");
     setIsFollowing(false);
   };
 
@@ -92,7 +90,7 @@ function ShowProfile() {
   return (
     <div className="profileRightTop">
       <div className="profileCover">
-        <img
+        {/* <img
           src={
             user.coverPicture
               ? PUBLIC_FOLDER + "/images" + user.coverPicture
@@ -100,7 +98,7 @@ function ShowProfile() {
           }
           alt=""
           className="profileCoverImg"
-        />
+        /> */}
         {showingUser.profilePicture ? (
           <img
             src={`${PUBLIC_FOLDER}/images/${showingUser.profilePicture}`}

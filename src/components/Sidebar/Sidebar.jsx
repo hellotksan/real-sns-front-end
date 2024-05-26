@@ -17,7 +17,7 @@ import { AuthContext } from "../../state/AuthContext";
 export default function Sidebar() {
   const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
 
-  const { user } = useContext(AuthContext);
+  const { user, isFetching, error } = useContext(AuthContext);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -34,17 +34,29 @@ export default function Sidebar() {
     fetchUser();
   }, [user, PUBLIC_FOLDER]);
 
+  if (isFetching) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
+
+  if (!user) {
+    return <div>User not found</div>;
+  }
+
   return (
     <div className="sidebar">
       <div className="sidebarWrapper">
         <ul className="sidebarList">
           <li className="sidebarListItem">
-            <Home className="sidebarIcon" />
             <Link to="/" style={{ textDecoration: "none", color: "black" }}>
+              <Home className="sidebarIcon" />
               <span className="sidebarListItemText">ホーム</span>
             </Link>
           </li>
-          <li className="sidebarListItem">
+          {/* <li className="sidebarListItem">
             <Search className="sidebarIcon" />
             <span className="sidebarListItemText">検索</span>
           </li>
@@ -59,22 +71,22 @@ export default function Sidebar() {
           <li className="sidebarListItem">
             <Bookmark className="sidebarIcon" />
             <span className="sidebarListItemText">ブックマーク</span>
-          </li>
+          </li> */}
           <li className="sidebarListItem">
-            <Person className="sidebarIcon" />
             <Link
               to={`/profile/${user.username}`}
               style={{ textDecoration: "none", color: "black" }}
             >
+              <Person className="sidebarIcon" />
               <span className="sidebarListItemText">プロフィール</span>
             </Link>
           </li>
           <li className="sidebarListItem">
-            <Settings className="sidebarIcon" />
             <Link
               to={`/settings/${user.username}`}
               style={{ textDecoration: "none", color: "black" }}
             >
+              <Settings className="sidebarIcon" />
               <span className="sidebarListItemText">設定</span>
             </Link>
           </li>

@@ -11,7 +11,7 @@ function Home() {
       <Topbar />
       <div className="homeContainer">
         <Sidebar />
-        <Timeline />
+        <Timeline toHome={true} />
         <Rightbar />
       </div>
     </>

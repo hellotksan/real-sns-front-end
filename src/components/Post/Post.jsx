@@ -2,12 +2,13 @@ import React, { useContext, useEffect, useState } from "react";
 import "./Post.css";
 import { MoreVert } from "@mui/icons-material";
 import PersonIcon from "@mui/icons-material/Person";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 import axios from "axios";
 import { format } from "timeago.js";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../state/AuthContext";
 
-export default function Post({ post }) {
+function Post({ post }) {
   const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
 
   const [like, setLike] = useState(post.likes.length);
@@ -24,7 +25,7 @@ export default function Post({ post }) {
         );
         setUser(response.data);
       } catch (error) {
-        console.error("Error fetching user data:", error);
+        console.error(error);
       }
     };
     fetchUser();
@@ -87,10 +88,17 @@ export default function Post({ post }) {
         <div className="postBottom">
           {/* いいね数の表示 */}
           <div className="postButtomLeft">
-            <img
+            {/* <img
               src={PUBLIC_FOLDER + "/images/heart.png"}
               alt=""
               className="likeIcon"
+              onClick={() => {
+                handleLike();
+              }}
+            /> */}
+            <FavoriteIcon
+              className="likeIcon"
+              style={{ color: "red" }}
               onClick={() => {
                 handleLike();
               }}
@@ -108,3 +116,5 @@ export default function Post({ post }) {
     </div>
   );
 }
+
+export default Post;

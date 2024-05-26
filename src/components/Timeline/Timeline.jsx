@@ -5,12 +5,11 @@ import Post from "../Post/Post";
 import axios from "axios";
 import { AuthContext } from "../../state/AuthContext";
 
-export default function Timeline({ username }) {
+function Timeline({ toHome = false, username }) {
   const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
 
   const [posts, setPosts] = useState([]);
-
-  const { user } = useContext(AuthContext);
+  const { user, isFetching, error } = useContext(AuthContext);
 
   useEffect(() => {
     const fetchPosts = async () => {
@@ -26,10 +25,22 @@ export default function Timeline({ username }) {
     fetchPosts();
   }, [username, user._id, PUBLIC_FOLDER]);
 
+  if (isFetching) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
+
+  if (!user) {
+    return <div>User not found</div>;
+  }
+
   return (
     <div className="timeline">
       <div className="timelineWrapper">
-        <Share />
+        <Share toHome={toHome} username={username} />
         {posts.map((post) => (
           <Post key={post._id} post={post} />
         ))}
@@ -37,3 +48,5 @@ export default function Timeline({ username }) {
     </div>
   );
 }
+
+export default Timeline;

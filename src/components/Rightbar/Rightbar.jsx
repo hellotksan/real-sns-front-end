@@ -1,20 +1,26 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./Rightbar.css";
 import AllFriend from "../allFriend/AllFriend";
 import CloseFriend from "../closeFriend/CloseFriend";
+import { AuthContext } from "../../state/AuthContext";
+import { useParams } from "react-router-dom";
 
-export default function Rightbar({ user }) {
+function Rightbar({ user }) {
+  const { username: showingUsername } = useParams();
+  const { isFetching, error } = useContext(AuthContext);
+
+  if (isFetching) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
+
   // ホームページ用の右サイドバー
   const HomeRightbar = () => {
     return (
       <>
-        {/* イベント情報に関するコンテナ */}
-        <div className="eventContainer">
-          <span className="eventText">
-            <b>フォロワー限定</b>イベント開催中！
-          </span>
-        </div>
-
         {/* 全ユーザの表示 */}
         <AllFriend />
       </>
@@ -32,12 +38,11 @@ export default function Rightbar({ user }) {
             <span className="rightbarInfoKey">出身:</span>
             <span className="rightbarInfoKey">未設定</span>
           </div>
-          <h4 className="rightbarTitle">あなたの友達</h4>
-          <div className="rightbarFollowings">
+          {user.username === showingUsername && (
             <div className="rightbarFollowing">
               <CloseFriend />
             </div>
-          </div>
+          )}
         </div>
       </>
     );
@@ -51,3 +56,5 @@ export default function Rightbar({ user }) {
     </div>
   );
 }
+
+export default Rightbar;
