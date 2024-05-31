@@ -64,7 +64,7 @@ function ShowProfile() {
   const handleUnfollow = async () => {
     try {
       await axios.put(
-        PUBLIC_FOLDER + `/api/users/${showingUser._id}/unfollow`,
+        `${PUBLIC_FOLDER}/api/users/${showingUser._id}/unfollow`,
         {
           userId: user._id,
         }

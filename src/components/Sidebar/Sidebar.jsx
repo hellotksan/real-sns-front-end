@@ -1,38 +1,20 @@
 import {
-  Bookmark,
+  // Bookmark,
   Home,
-  Notifications,
-  MessageRounded,
+  // Notifications,
+  // MessageRounded,
   Person,
-  Search,
+  // Search,
   Settings,
 } from "@mui/icons-material";
 import "./Sidebar.css";
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import CloseFriend from "../closeFriend/CloseFriend";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import { AuthContext } from "../../state/AuthContext";
 
-export default function Sidebar() {
-  const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
-
+function Sidebar() {
   const { user, isFetching, error } = useContext(AuthContext);
-
-  useEffect(() => {
-    const fetchUser = async () => {
-      if (!user) {
-        return;
-      }
-
-      try {
-        await axios.get(`${PUBLIC_FOLDER}/api/users?username=${user.username}`);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    fetchUser();
-  }, [user, PUBLIC_FOLDER]);
 
   if (isFetching) {
     return <div>Loading...</div>;
@@ -97,3 +79,5 @@ export default function Sidebar() {
     </div>
   );
 }
+
+export default Sidebar;

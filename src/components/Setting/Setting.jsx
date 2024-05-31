@@ -19,7 +19,7 @@ const EditProfile = ({ username }) => {
         );
         setDesc(response.data.desc);
       } catch (error) {
-        console.error("Error fetching user data:", error);
+        console.error(error);
       }
     };
     fetchUser();
@@ -75,6 +75,10 @@ const EditProfile = ({ username }) => {
 
   if (error) {
     return <div>Error occurred</div>;
+  }
+
+  if (!user) {
+    return <div>User not found</div>;
   }
 
   return (

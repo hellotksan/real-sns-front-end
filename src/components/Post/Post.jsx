@@ -15,7 +15,7 @@ function Post({ post }) {
   const [isLiked, setIsLiked] = useState(false);
   const [user, setUser] = useState({});
 
-  const { user: currentUser } = useContext(AuthContext);
+  const { user: currentUser, isFetching, error } = useContext(AuthContext);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -44,13 +44,24 @@ function Post({ post }) {
     setIsLiked(!isLiked);
   };
 
+  if (isFetching) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
+
   return (
     <div className="post">
       <div className="postWrapper">
         {/* 投稿したユーザーのプロフィールを表示 */}
         <div className="postTop">
           <div className="postTopLeft">
-            <Link to={`/profile/${user.username}`}>
+            <Link
+              to={`/profile/${user.username}`}
+              style={{ textDecoration: "none", color: "black" }}
+            >
               {user.profilePicture ? (
                 <img
                   src={`${PUBLIC_FOLDER}/images/${user.profilePicture}`}
@@ -88,14 +99,6 @@ function Post({ post }) {
         <div className="postBottom">
           {/* いいね数の表示 */}
           <div className="postButtomLeft">
-            {/* <img
-              src={PUBLIC_FOLDER + "/images/heart.png"}
-              alt=""
-              className="likeIcon"
-              onClick={() => {
-                handleLike();
-              }}
-            /> */}
             <FavoriteIcon
               className="likeIcon"
               style={{ color: "red" }}
