@@ -7,8 +7,8 @@ import { AuthContext } from "../../state/AuthContext";
 
 const AllFriend = () => {
   const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
-  const [users, setUsers] = useState([]);
 
+  const [users, setUsers] = useState([]);
   const { user: currentUser, isFetching, error } = useContext(AuthContext);
 
   useEffect(() => {
@@ -20,7 +20,6 @@ const AllFriend = () => {
         console.error(error);
       }
     };
-
     fetchUsers();
   }, [PUBLIC_FOLDER]);
 

@@ -29,7 +29,7 @@ function ShowProfile() {
 
   useEffect(() => {
     const checkFollowingStatus = async () => {
-      if (user && user.followings) {
+      if (user.followings) {
         try {
           for (const id of user.followings) {
             const response = await axios.get(
@@ -52,7 +52,7 @@ function ShowProfile() {
 
   const handleFollow = async () => {
     try {
-      await axios.put(PUBLIC_FOLDER + `/api/users/${showingUser._id}/follow`, {
+      await axios.put(`${PUBLIC_FOLDER}/api/users/${showingUser._id}/follow`, {
         userId: user._id,
       });
     } catch (error) {
