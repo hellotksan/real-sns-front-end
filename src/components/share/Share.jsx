@@ -1,6 +1,6 @@
 import React, { useContext, useRef } from "react";
 import "./Share.css";
-// import { Analytics, Face, Gif, Image, NoEncryption } from "@mui/icons-material";
+import { Analytics, Face, Gif, Image } from "@mui/icons-material";
 import { AuthContext } from "../../state/AuthContext";
 import axios from "axios";
 import PersonIcon from "@mui/icons-material/Person";
@@ -75,9 +75,8 @@ function Share({ toHome = false, username }) {
           ) : (
             <PersonIcon className="shareProfileImg" />
           )}
-          <input
-            type="text"
-            className="shareInput"
+          <textarea
+            className="w-full px-3 py-2 rounded-lg border-2 border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-200 resize-vertical"
             placeholder="今何してるの？"
             ref={desc}
           />
@@ -86,18 +85,18 @@ function Share({ toHome = false, username }) {
 
         <form className="shareButtons" onSubmit={(e) => handleSubmit(e)}>
           <div className="shareOptions">
-            {/* <label className="shareOption" htmlFor="file">
+            <label className="shareOption" htmlFor="file">
               <Image className="shareIcon" htmlColor="blue" />
               <span className="shareOptionText">写真</span>
-              <input
+              {/* <input
                 type="file"
                 id="file"
                 accept=".png,.jpeg,.jpg"
                 style={{ display: "none" }}
                 onChange={(e) => setFile(e.target.files[0])}
-              />
-            </label> */}
-            {/* <div className="shareOption">
+              /> */}
+            </label>
+            <div className="shareOption">
               <Gif className="shareIcon" htmlColor="hotpink" />
               <span className="shareOptionText">GIF</span>
             </div>
@@ -108,7 +107,7 @@ function Share({ toHome = false, username }) {
             <div className="shareOption">
               <Analytics className="shareIcon" htmlColor="red" />
               <span className="shareOptionText">投票</span>
-            </div> */}
+            </div>
           </div>
           <button className="shareButton" type="submit">
             投稿

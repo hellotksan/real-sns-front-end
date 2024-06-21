@@ -13,6 +13,7 @@ import {
   Navigate,
 } from "react-router-dom";
 import { AuthContext } from "./state/AuthContext";
+import "./index.css";
 
 function App() {
   const { user } = useContext(AuthContext);

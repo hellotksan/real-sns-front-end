@@ -1,10 +1,13 @@
-import React, { useRef } from "react";
+import React, { useContext, useRef } from "react";
 import "./Register.css";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../state/AuthContext";
 
 export default function Register() {
   const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
+
+  const { user, isFetching, error } = useContext(AuthContext);
 
   const username = useRef();
   const email = useRef();
@@ -44,6 +47,18 @@ export default function Register() {
       }
     }
   };
+
+  if (isFetching) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
+
+  if (!user) {
+    return <div>User not found</div>;
+  }
 
   return (
     <div className="login">
