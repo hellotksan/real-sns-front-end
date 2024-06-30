@@ -68,6 +68,18 @@ https://real-sns-front-end.vercel.app/
 
 4. ブラウザで `http://localhost:3000` を開き、アプリを確認します。
 
+## typescript の自動コンパイル
+
+```sh
+tsc --watch
+```
+
+又は
+
+```sh
+ts-node-dev --respawn src/index.ts
+```
+
 ## 使用方法
 
 このセクションでは、アプリの主要な機能や使い方を説明します。
@@ -79,13 +91,14 @@ https://real-sns-front-end.vercel.app/
 
 プロジェクトのディレクトリ構造は以下の通りです：
 
+```java
 ├── public
 │ ├── assets
 │ ├── index.html
 │ └── ...
 ├── src
 │ ├── components
-│ ├── pagess
+│ ├── pages
 │ ├── state
 │ ├── App.js
 │ ├── index.js
@@ -93,4 +106,5 @@ https://real-sns-front-end.vercel.app/
 ├── .gitignore
 ├── package.json
 ├── README.md
-└── ..
+└── ...
+```

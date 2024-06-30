@@ -7,7 +7,7 @@ import { AuthContext } from "../../state/AuthContext";
 export default function Register() {
   const PUBLIC_FOLDER = process.env.REACT_APP_PUBLIC_FOLDER;
 
-  const { user, isFetching, error } = useContext(AuthContext);
+  const { isFetching, error } = useContext(AuthContext);
 
   const username = useRef();
   const email = useRef();
@@ -37,13 +37,15 @@ export default function Register() {
         await axios.post(PUBLIC_FOLDER + "/api/auth/register", user);
         navigate("/login");
       } catch (error) {
-        if (error.response && error.response.status === 500) {
-          alert(
-            "このメールアドレスは既に登録されています。別のメールアドレスをお試しください。"
-          );
-        } else {
-          console.log(error);
-        }
+        // if (error.response && error.response.status === 500) {
+        //   alert(
+        //     "このメールアドレスは既に登録されています。別のメールアドレスをお試しください。"
+        //   );
+        // } else {
+        window.alert("エラーが発生しました。");
+        console.log(error);
+        window.location.reload();
+        // }
       }
     }
   };
@@ -54,10 +56,6 @@ export default function Register() {
 
   if (error) {
     return <div>Error: {error.message}</div>;
-  }
-
-  if (!user) {
-    return <div>User not found</div>;
   }
 
   return (

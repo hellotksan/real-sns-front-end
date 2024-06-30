@@ -6,6 +6,7 @@ import Profile from "./pages/profile/Profile";
 import Register from "./pages/register/Register";
 import Setting from "./pages/settings/Settings";
 import PostEdit from "./pages/postEdit/PostEdit";
+import Users from "./pages/users/Users";
 import {
   BrowserRouter as Router,
   Route,
@@ -30,6 +31,7 @@ function App() {
         <Route path="/profile/:username" element={<Profile />} />
         <Route path="/settings/:username" element={<Setting />} />
         <Route path="/postedit/:username/:postId" element={<PostEdit />} />
+        <Route path="/users" element={<Users />} />
       </Routes>
     </Router>
   );

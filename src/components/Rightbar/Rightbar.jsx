@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import "./Rightbar.css";
-import AllFriend from "../allFriend/AllFriend";
 import CloseFriend from "../closeFriend/CloseFriend";
 import { AuthContext } from "../../state/AuthContext";
 import { useParams } from "react-router-dom";
@@ -19,12 +18,7 @@ function Rightbar({ user }) {
 
   // ホームページ用の右サイドバー
   const HomeRightbar = () => {
-    return (
-      <>
-        {/* 全ユーザの表示 */}
-        <AllFriend />
-      </>
-    );
+    return <></>;
   };
 
   // プロフィールページ用の右サイドバー

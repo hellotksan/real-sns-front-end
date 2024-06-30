@@ -72,6 +72,15 @@ function Sidebar() {
               <span className="sidebarListItemText">設定</span>
             </Link>
           </li>
+          <li className="sidebarListItem">
+            <Link
+              to={`/users`}
+              style={{ textDecoration: "none", color: "black" }}
+            >
+              <Person className="sidebarIcon" />
+              <span className="sidebarListItemText">全ユーザー</span>
+            </Link>
+          </li>
         </ul>
         <hr className="sidebarHr" />
         <CloseFriend users={user} />
