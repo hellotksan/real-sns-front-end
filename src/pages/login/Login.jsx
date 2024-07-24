@@ -67,14 +67,14 @@ export default function Login() {
               ref={password}
             />
             <button className="loginButton">ログイン</button>
-            <span className="loginForgot">パスワードを忘れた方へ</span>
-            <button
-              className="loginRegisterButton"
-              onClick={handleRegisterRedirect}
-            >
-              アカウント作成
-            </button>
+            {/* <span className="loginForgot">パスワードを忘れた方へ</span> */}
           </form>
+          <button
+            className="loginRegisterButton"
+            onClick={handleRegisterRedirect}
+          >
+            アカウント作成
+          </button>
         </div>
       </div>
     </div>
